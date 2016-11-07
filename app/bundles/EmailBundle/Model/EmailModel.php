@@ -20,6 +20,7 @@ use Mautic\CoreBundle\Helper\Chart\PieChart;
 use Mautic\CoreBundle\Helper\CoreParametersHelper;
 use Mautic\CoreBundle\Helper\DateTimeHelper;
 use Mautic\CoreBundle\Helper\IpLookupHelper;
+use Mautic\CoreBundle\Helper\ProgressBarHelper;
 use Mautic\CoreBundle\Helper\ThemeHelper;
 use Mautic\CoreBundle\Model\FormModel;
 use Mautic\CoreBundle\Model\MessageQueueModel;
@@ -42,7 +43,6 @@ use Mautic\LeadBundle\Model\CompanyModel;
 use Mautic\LeadBundle\Model\LeadModel;
 use Mautic\PageBundle\Model\TrackableModel;
 use Mautic\UserBundle\Model\UserModel;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -896,7 +896,7 @@ class EmailModel extends FormModel
 
             // Broadcast send through CLI
             $output->writeln("\n<info>".$email->getName().'</info>');
-            $progress = new ProgressBar($output, $totalLeadCount);
+            $progress = ProgressBarHelper::init($output, $totalLeadCount);
         }
 
         foreach ($lists as $list) {
